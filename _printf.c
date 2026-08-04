@@ -41,21 +41,21 @@ int _printf(const char *format, ...)
 			switch (format[i])
 			{
 				case 'c':
-					count += print_char(va_arg(args, int));
-					break;
+				count += print_char(va_arg(args, int));
+				break;
 
 				case 's':
-					count += print_string(va_arg(args, char *));
-					break;
+				count += print_string(va_arg(args, char *));
+				break;
 
 				case '%':
-					count += print_char('%');
-					break;
+				count += print_char('%');
+				break;
 
 				default:
-					count += print_char('%');
-					count += print_char(format[i]);
-					break;
+				count += print_char('%');
+				count += print_char(format[i]);
+				break;
 			}
 		}
 
