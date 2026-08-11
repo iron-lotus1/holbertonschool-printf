@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdarg.h>
 
 /**
  * _printf - produces output according to a format
@@ -34,29 +35,45 @@ int _printf(const char *format, ...)
 			}
 
 			switch (format[i])
-			{
-			case 'c':
-				count += print_char(va_arg(args, int));
-				break;
+{
+case 'c':
+	count += print_char(va_arg(args, int));
+	break;
 
-			case 's':
-				count += print_string(va_arg(args, char *));
-				break;
+case 's':
+	count += print_string(va_arg(args, char *));
+	break;
 
-			case 'd':
-			case 'i':
-				count += print_int(va_arg(args, int));
-				break;
+case 'd':
+case 'i':
+	count += print_int(va_arg(args, int));
+	break;
 
-			case '%':
-				count += print_char('%');
-				break;
+case 'u':
+	count += print_unsigned_base(va_arg(args, unsigned int), 10, 0);
+	break;
 
-			default:
-				count += print_char('%');
-				count += print_char(format[i]);
-				break;
-			}
+case 'o':
+	count += print_unsigned_base(va_arg(args, unsigned int), 8, 0);
+	break;
+
+case 'x':
+	count += print_unsigned_base(va_arg(args, unsigned int), 16, 0);
+	break;
+
+case 'X':
+	count += print_unsigned_base(va_arg(args, unsigned int), 16, 1);
+	break;
+
+case '%':
+	count += print_char('%');
+	break;
+
+default:
+	count += print_char('%');
+	count += print_char(format[i]);
+	break;
+}
 		}
 
 		i++;
